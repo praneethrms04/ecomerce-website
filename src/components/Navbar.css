@@ -1,0 +1,18 @@
+#searchbox{
+    width: 45vw;
+   margin: 0vw;
+}
+#brand{
+    font-size: 2vw;
+    font-style: italic;
+    color: rgb(184, 37, 37);
+}
+#navbar{
+    height: 10px;
+}
+#navbarSupportedContent{
+    width: min-content;
+}
+#roww{
+    width: 99.7vw;
+ }

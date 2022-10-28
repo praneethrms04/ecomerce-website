@@ -1,0 +1,9 @@
+#hover:hover{
+    text-decoration: underline;
+ }
+ #row{
+    width: 99.7vw;
+ }
+ .list-group-item{
+    border: none;
+ }

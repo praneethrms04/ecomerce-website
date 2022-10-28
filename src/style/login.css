@@ -1,0 +1,38 @@
+#containerss {
+  width: 350px;
+  padding: 40px;
+  border-radius: 20%;
+  top: 43%;
+  left: 27%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  background: transparent;
+  text-align: center;
+}
+
+h2 {
+  color: rgb(143, 26, 143);
+  margin-top: 5px;
+  padding: 15px;
+}
+
+#button {
+  background-color: darkgreen;
+  color: antiquewhite;
+  font-size: large;
+}
+#button:hover {
+  font-size: larger;
+}
+
+#inputt {
+  text-align: center;
+  padding: 10px;
+  border-radius: 15%;
+  border: 1px solid rgb(157, 13, 13);
+  background: transparent;
+}
+#inputt:hover {
+  border: 2px dotted rgb(157, 13, 13);
+  font-size: large;
+}
