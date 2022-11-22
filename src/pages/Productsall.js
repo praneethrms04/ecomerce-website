@@ -1,90 +1,62 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "../components/Navbar";
 import { Link } from "react-router-dom";
+import { Row, Col, Card, Button, Container } from "react-bootstrap";
+
+import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
+export default function Productsall() {
+  const [products, setProducts] = useState([]);
 
-
-export default function Productsall () {
-    const [products, setProducts] = useState([]);
-    const [loading, setLoading] = useState(false);
-
-    useEffect(()=>{
-        const getProducts = async () => {
-            setLoading(true);
-          await fetch("https://fakestoreapi.com/products")
-              .then((response) => response.json())
-              .then((data) => setProducts(data));
-            setLoading(false);
-          };
-          getProducts();
-    },[])
-
-    const Loading=()=>{
-        return(
-          <>
-      <div className="col-md-3">
-         <h2>Loading...</h2>
-     </div>
-         </>
-        )
-    }
-
-
-    const ShowProducts = () => {
-        return (
-          <>
-            {products.map((product) => {
-              return (
-                <>
-                  <div className="col-md-3 mb-4 ">
-                    <div className="card h-100 text-center p-4" key={product.id}>
-                      <img
-                        src={product.image}
-                        className="card-img-top"
-                        alt={product.title}
-                        height="250 px"
-                      />
-                      <div className="card-body">
-                        <h5 className="card-title mb-0">
-                          {product.title.substring(0, 12)}
-                        </h5>
-                        <p className="card-text fw-bolder lead">${product.price}</p>
-                        <Link
-                          to={`/detail/${product.id}`}
-                          className="btn btn-warning"
-                        >
-                          Buy Now
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-               
-                </>
-              );
-            })}
-          </>
-        );
-      };
+  useEffect(() => {
+    fetch("https://fakestoreapi.com/products")
+      .then((response) => response.json())
+      .then((data) => setProducts(data));
+  }, []);
 
   return (
     <>
-    <Navbar/>
-    <div className=" container my-5 py-5" id="main">
-      <div className="row">
-        <div className="col-12 mb-5">
-          <h1 className="display-6 fw-bolder text-center text-upercase text-secondary">
-            "ALL LATEST PRODUCT ARE HERE"
+      <Navbar />
+      <Row className="pt-5">
+        <Col className="pt-5">
+          <h1 className="fw-bolder text-center text-upercase text-dark">
+            ALL LATEST PRODUCT ARE HERE
           </h1>
-         
-        </div>
-      </div>
-      <div className="row justify-content-center mt-4">
-        {loading ? <Loading /> : <ShowProducts />}
-      </div>
-    </div>
-    <Footer/>
-
-  </>
-)
+        </Col>
+      </Row>
+      <Row xs={1} md={4} className="ms-1 g-4">
+        {products.map((product) => {
+          return (
+            <Container className="mt-5 pb-5">
+              <Col className="p-3 mt-3 g-2">
+                <Card
+                  style={{ width: "18rem" }}
+                  className="widget border-secondary text-center p-4 g-3"
+                  key={product.id}
+                  id="widget"
+                >
+                  <Card.Img
+                    variant="top"
+                    src={product.image}
+                    alt={product.title}
+                    height="250 px"
+                  />
+                  <Card.Body>
+                    <Card.Title>{product.title.substring(0, 12)}</Card.Title>
+                    <Card.Text>
+                      Price :<b> $ {product.price}</b>
+                    </Card.Text>
+                    <Link to={`/detail/${product.id}`}>
+                      <Button variant="warning">Buy Now</Button>
+                    </Link>
+                  </Card.Body>
+                </Card>
+              </Col>
+            </Container>
+          );
+        })}
+      </Row>
+      <Footer />
+    </>
+  );
 }

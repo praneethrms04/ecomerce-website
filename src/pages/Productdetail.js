@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "../components/Navbar";
 import { useDispatch } from "react-redux";
 import { addCart } from "../redux/action";
 import { useParams } from "react-router-dom";
-import Footer from "../components/Footer";
-import Skeleton from "react-loading-skeleton";
 import { Link } from "react-router-dom";
+
+import { Row, Col, Container,Button } from "react-bootstrap";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 const Productdetail = () => {
   const [product, setProduct] = useState([]);
-  const [loading, setLoading] = useState(false);
   const { id } = useParams();
-
   const dispatch = useDispatch();
 
   const addProduct = (product) => {
@@ -20,58 +19,43 @@ const Productdetail = () => {
 
   useEffect(() => {
     const getProducts = async () => {
-      setLoading(true);
       await fetch(`https://fakestoreapi.com/products/${id}`)
         .then((response) => response.json())
         .then((data) => setProduct(data));
-      setLoading(false);
     };
     getProducts();
   }, [id]);
 
-  const Loading = () => {
-    return (
-      <>
-        <Skeleton />
-      </>
-    );
-  };
-
-  const ShowProduct = () => {
-    return (
-      <>
-        <div className="col-md-6 ">
-          <img
-            src={product.image}
-            alt={product.title}
-            height="400px"
-            width="400px"
-          />
-        </div>
-
-        <div className="col-md-6 p-4">
-          <h4 className="text-uppercase text-black-50">{product.category}</h4>
-          <h1 className="display-5"> {product.title} </h1>
-          <h4 className="p-2">
-            Rating {product.rating && product.rating.rate}
-            <i className="fa fa-star"></i>
+  return (
+    <>
+    <Navbar />
+      <Row className="py-5">
+        <Col md={{ offset: 1 }} className="pt-4">
+          <Container className="mt-5">
+            <img
+              src={product.image}
+              alt={product.title}
+              height="350px"
+              width="350px"
+            />
+            <p className="mt-4 ms-5"> {product.title} </p>
+          </Container>
+        </Col>
+        <Col md={7}>
+          <h3 className="mt-5 text-uppercase">{product.category}</h3>
+          <h4 className="pt-4">
+            Rating : {product.rating && product.rating.rate} / 5
           </h4>
-          <h3>
-            Special Price: <i className="fa fa-usd" aria-hidden="true"></i>{" "}
-            {product.price} /-
-          </h3>
-          <p className="lead p-2">{product.description}</p>
-          <i className="fa fa-map-marker"></i>{" "}
-          <input type="text" placeholder="Enter Delivery Pincode"></input>
-          <button className="btn-outline-success">Chek</button>
-          <div className="button mt-4">
-            <button
-              className="btn btn-warning px-4"
+          <p className="pt-4">{product.description}</p>
+          <h3 className="pt-3">Price: $ {product.price} /-</h3>
+          <div className="pt-4">
+            <Button
+              variant ="info"
               onClick={() => addProduct(product)}
             >
               <i className="fa fa-cart-plus  me-1" aria-hidden="true"></i>
-              ADD TO CART{" "}
-            </button>
+              ADD TO CART
+            </Button>
             <Link to={"/chekout"}>
               <div className="btn btn-warning ms-2 px-4">
                 <i className="fa fa-hand-peace-o me-1" aria-hidden="true"></i>
@@ -79,19 +63,10 @@ const Productdetail = () => {
               </div>
             </Link>
           </div>
-        </div>
-        <br />
-      </>
-    );
-  };
-
-  return (
-    <>
-      <Navbar />
-      <div className="container ">
-        <div className="row p-4">{loading ? <Loading /> : <ShowProduct />}</div>
-      </div>
+        </Col>
+      </Row>
       <Footer />
+  
     </>
   );
 };

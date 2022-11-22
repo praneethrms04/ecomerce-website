@@ -1,90 +1,111 @@
-import React from "react";
-import {  useSelector } from "react-redux";
-import Navbar from "../components/Navbar";
-import "../style/cart.css"
+import { useSelector } from "react-redux";
 import { addCart, delCart } from "../redux/action";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
+import { Container, Row, Col, Button } from "react-bootstrap";
 
-const  Cart=()=> {
-  const state =useSelector((state)=>state.HandelCart)
-  const dispatch = useDispatch()
-  
-  const increaseItem=(item)=>{
-    dispatch(addCart(item))
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import emptycart from "../Images/emptycart.png";
+
+const Cart = () => {
+  const state = useSelector((state) => state.HandelCart);
+  const dispatch = useDispatch();
+
+  const increaseItem = (item) => {
+    dispatch(addCart(item));
   };
 
-  const decreaseItem=(item)=>{
-    dispatch(delCart(item))
+  const decreaseItem = (item) => {
+    dispatch(delCart(item));
   };
 
-  const cartItems=(product)=>{
-    return(
+  const cartItems = (product) => {
+    return (
       <>
-      
-      <div className="container">
-        <div className="row mt-4 ">
-          <div className="col-md-6 pl=4 " >
-            <img src={product.image} alt=".." 
-              height="150px" width="130px"
-            />
-          </div>
-          <div className="col-md-6 pr=4">
-            <h3>{product.title}</h3>
-            <p className="lead fw-bolder">
-              {product.qty} X ${product.price}= ${product.qty * product.price}
-            </p>
-            <button className="rounded-pill btn-success me-1" onClick={()=>increaseItem(product)}><i className="fa fa-plus" aria-hidden="true"></i></button>
-            <button className="rounded-pill btn-danger" onClick={()=>decreaseItem(product)}><i className="fa fa-minus" aria-hidden="true"></i></button>
-          </div>
-        </div>
-          <hr/>
-      </div>
-    </>
-    )
+        <Container>
+          <Row>
+            <Col className="mt-3">
+              <img
+                src={product.image}
+                alt="product-img"
+                height="200px"
+                width="200px"
+              />
+            </Col>
+            <Col>
+              <h3>{product.title}</h3>
+              <p className="lead fw-bolder">
+                {product.qty} X $ {product.price} = ${" "}
+                {product.qty * product.price}
+              </p>
+              <p>{product.description}</p>
 
-  }
-
-  const emptyCart=()=>{
-    return(
-      <>
-        <div className="container">
-        <div className="col-12 mt-5">
-            <h1 className="display-6 fw-bolder text-center text-upercase text-secondary">
-             YOUR CART IS EMPTY RIGHT NOW  <i className="fa fa-cart-arrow-down" aria-hidden="true"></i>
-            </h1>
-            <hr />
-          </div>
-        </div>
+              <button
+                className="rounded-pill btn-success me-1"
+                onClick={() => increaseItem(product)}
+              >
+                <i className="fa fa-plus" aria-hidden="true"></i>
+              </button>
+              <button
+                className="rounded-pill btn-danger"
+                onClick={() => decreaseItem(product)}
+              >
+                <i className="fa fa-minus" aria-hidden="true"></i>
+              </button>
+            </Col>
+          </Row>
+        </Container>
       </>
-    )
-  }
-
-  const button=()=>{
-    return(
+    );
+  };
+  const emptyCart = () => {
+    return (
       <>
-        <div className="container">
-        <div className="col-12 mt-5">
-            <h1 className="display-6 fw-bolder text-center text-upercase text-secondary">
-             <Link to={"/chekout"} className="btn btn-warning">Proceed to checkout ({state.length} item)</Link>
-            </h1>
-          </div>
-        </div>
+        <Container>
+          <Row>
+            <Col className="text-center">
+              <h3>Your Cart is Empty Right Now....!</h3>
+              <img src={emptycart} alt="" width="70%" height="70%" />
+
+              <Link to="/allproducts">
+                <div>
+                  <Button variant="danger opacity-75">Go to Products</Button>
+                </div>
+              </Link>
+            </Col>
+          </Row>
+        </Container>
       </>
-    )
-  }
-  
+    );
+  };
+
+  const button = () => {
+    return (
+      <>
+        <p className="pt-3">
+          <Link to={"/chekout"} className="btn btn-info">
+            Proceed to checkout ({state.length} item)
+          </Link>
+        </p>
+      </>
+    );
+  };
+
   return (
-    
     <>
-    <Navbar />
-      {state.length !== 0 && state.map(cartItems)}
-      {state.length ===0 && emptyCart()}
-      {state.length !== 0 && button()}
-      {/* <Footer/> */}
+      <Navbar />
+      <Container className="py-5">
+        <div className="pt-5">
+          {state.length !== 0 && state.map(cartItems)}
+          {state.length === 0 && emptyCart()}
+          {state.length !== 0 && button()}
+        </div>
+      </Container>
+      <Footer />
     </>
   );
-}
+};
 
 export default Cart;

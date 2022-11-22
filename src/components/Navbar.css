@@ -1,18 +1,27 @@
-#searchbox{
-    width: 45vw;
-   margin: 0vw;
-}
-#brand{
-    font-size: 2vw;
-    font-style: italic;
-    color: rgb(184, 37, 37);
-}
-#navbar{
-    height: 10px;
-}
-#navbarSupportedContent{
-    width: min-content;
-}
-#roww{
-    width: 99.7vw;
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+    position: fixed;
+    width: 100%;
+    height: 60px;
+    z-index: 10;
+    text-decoration: none;
  }
+.header-bg {
+    background-color: black;
+}
+
+.nav-menu {
+    display: flex;
+}
+.nav-menu a {
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-decoration: none;
+    margin-right: 40px;
+    color: #fff;
+}
+

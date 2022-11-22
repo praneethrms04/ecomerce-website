@@ -1,139 +1,126 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import "../style/product.css";
+import { Row, Col, Card, Button, Container } from "react-bootstrap";
 
-export default function Products() {
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+
+const Products = () => {
   const [products, setProducts] = useState([]);
   const [filter, setFilter] = useState(products);
-  const [loading, setLoading] = useState(false);
-
   useEffect(() => {
     const getProducts = async () => {
-      setLoading(true);
-   await fetch("https://fakestoreapi.com/products")
+      await fetch("https://fakestoreapi.com/products")
         .then((response) => response.json())
         .then((data) => setProducts(data));
-      setLoading(false);
     };
     getProducts();
   }, []);
-
-  const Loading = () => {
-    return (
-      <>
-        <div className="col-md-3">
-          <h2>Loading...</h2>
-        </div>
-      </>
-    );
-  };
-
   const updateProduct = (cat) => {
     const updateList = products.filter((x) => x.category === cat);
+    // console.log(updateList)
     setFilter(updateList);
   };
-
-  const ShowProducts = () => {
-    return (
-      <>
-        <div className=" d-flex justify-content-center pb-5 ">
-          <button
-            className="btn me-2 p-4 "
+  return (
+    <>
+    <Navbar />
+      <Row className="pt-5" >
+        <div className="col-12 m-5 pt-3">
+          <h2 className="display-6 fw-bolder text-center text-upercase text-success">
+            CHOOSE PRODUCT CATEGORY
+          </h2>
+        </div>
+      </Row>
+      <Row
+        xs={1}
+        md={4}
+        className="g-3 d-flex justify-content-center align-items-center mb-5 pb-5"
+      >
+        <Col className="d-flex justify-content-center align-items-center">
+          <Card
+            style={{ width: 15 + "rem", height: 8 + "rem" }}
             id="category"
             onClick={() => updateProduct("men's clothing")}
+            className="bg-secondary rounded-pill text-white"
           >
-            <img
-              src="https://assetscdn1.paytm.com/images/catalog/view_item/787364/1617369686163.jpg?imwidth=480&impolicy=hq"
-              alt="men's clothing"
-              height={"240 px"}
-              width={"305 px"}
-            />
-          </button>
-          <button
-            className="btn me-2 p-4"
+            <Card.Body className="d-flex justify-content-center align-items-center">
+              <Card.Title className="pe-auto">Men's Clothing</Card.Title>
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col className="d-flex justify-content-center align-items-center">
+          <Card
+            style={{ width: 15 + "rem", height: 8 + "rem" }}
             id="category"
             onClick={() => updateProduct("women's clothing")}
+            className="bg-secondary text-white rounded-pill"
           >
-            <img
-              src="https://i.pinimg.com/originals/c4/47/d0/c447d0bcb4273a13a1910aa0aedc7576.jpg"
-              alt="women's clothing"
-              height={"240 px"}
-              width={"305 px"}
-            />
-          </button>
-          <button
-            className="btn me-2 p-4 "
+            <Card.Body className="d-flex justify-content-center align-items-center">
+              <Card.Title>Women's Clothing</Card.Title>
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col className="d-flex justify-content-center align-items-center">
+          <Card
+            style={{ width: 15 + "rem", height: 8 + "rem" }}
             id="category"
             onClick={() => updateProduct("electronics")}
+            className="bg-secondary text-white rounded-pill"
           >
-            <img
-              src="https://th.bing.com/th/id/R.6deae59e1270f6b360977aa05d56f9e8?rik=O9ArwgSJaO%2b05A&riu=http%3a%2f%2fwww.shopickr.com%2fwp-content%2fuploads%2f2015%2f10%2famazon-india-electronics-sale-2015-banner1.jpg&ehk=VACx5MRwH8sPudZb9Q5uIdL%2bMRBOxWn%2bBfVFKT5HCvw%3d&risl=&pid=ImgRaw&r=0"
-              alt="electronics"
-              height={"240 px"}
-              width={"305 px"}
-            />
-          </button>
-          <button
-            className="btn me-2 p-4 "
+            <Card.Body className="d-flex justify-content-center align-items-center">
+              <Card.Title>Electronics</Card.Title>
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col className="d-flex justify-content-center align-items-center">
+          <Card
+            style={{ width: 15 + "rem", height: 8 + "rem" }}
             id="category"
             onClick={() => updateProduct("jewelery")}
+            className="bg-secondary text-white rounded-pill"
           >
-            <img
-              src="https://th.bing.com/th/id/R.0c86f04b512133600b128ed19019e1a9?rik=tg7kCWWzbxcXbw&riu=http%3a%2f%2fwww.burbanktowncenter.com%2fwp-content%2fuploads%2fsites%2f130%2f2018%2f01%2fSA-FJ-for-BTC.jpg&ehk=bM0JxHMHXlDMB2WDpi8ByseUl0UwpKc7LDdaMcVg0NA%3d&risl=&pid=ImgRaw&r=0"
-              alt="jewelery"
-              height={"240 px"}
-              width={"305 px"}
-            />
-          </button>
-        </div>
+            <Card.Body className="d-flex justify-content-center align-items-center">
+              <Card.Title>Jewellary</Card.Title>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
 
+      <Row xs={1} md={4} className="g-3 me-3">
         {filter.map((product) => {
           return (
-            <>
-              <div className="col-md-3 mb-4 ">
-                <div className="card h-100 text-center  p-4" key={product.id}>
-                  <img
+            <Container className="mt-5 mb-5">
+              <Col className="p-3 mt-3 ms-4">
+                <Card
+                  style={{ width: "18rem" }}
+                  className="widget border-secondary text-center p-4"
+                  key={product.id}
+                  id="widget"
+                >
+                  <Card.Img
+                    variant="top"
                     src={product.image}
-                    className="card-img-top"
                     alt={product.title}
                     height="250 px"
                   />
-                  <div className="card-body">
-                    <h5 className="card-title mb-0">
-                      {product.title.substring(0, 12)}
-                    </h5>
-                    <p className="card-text fw-bolder lead">${product.price}</p>
-                    <Link
-                      to={`/detail/${product.id}`}
-                      className="btn btn-warning"
-                    >
-                      Buy Now
+                  <Card.Body>
+                    <Card.Title>{product.title.substring(0, 12)}</Card.Title>
+                    <Card.Text>
+                      Price :<b> $ {product.price}</b>
+                    </Card.Text>
+                    <Link to={`/detail/${product.id}`}>
+                      <Button variant="warning">Buy Now</Button>
                     </Link>
-                  </div>
-                </div>
-              </div>
-            </>
+                  </Card.Body>
+                </Card>
+              </Col>
+            </Container>
           );
         })}
-      </>
-    );
-  };
-
-  return (
-    <div>
-      <div className=" container my-5 py-5">
-        <div className="row">
-          <div className="col-12 mb-5">
-            <h1 className="display-6 fw-bolder text-center text-upercase text-secondary">
-              "CHOOSE PRODUCT CATEGORY"
-            </h1>
-            <hr />
-          </div>
-        </div>
-        <div className="row justify-content-center">
-          {loading ? <Loading /> : <ShowProducts />}
-        </div>
-      </div>
-    </div>
+      </Row>
+      <Footer />
+    </>
   );
-}
+};
+
+export default Products;
