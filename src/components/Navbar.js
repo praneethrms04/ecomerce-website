@@ -1,34 +1,32 @@
+import React from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Nav, NavLink, Bars, NavMenu } from "./NavbarElements";
 
-import "./Navbar.css";
-
-function Navbar() {
- const state = useSelector((state) => state.HandelCart);
+const Navbar = () => {
+  const state = useSelector((state) => state.HandelCart);
 
   return (
     <>
-      <div className="header header-bg">
-        <Link to="/" className="text-decoration-none">
-          <h2 className="text-dark"><i>Shopping</i> </h2>
-        </Link>
-        <ul className="nav-menu">
-          <Link to="/" className="btn-outline-warning">
+      <Nav>
+        <Bars />
+        <NavMenu className="text-white bold">
+          <NavLink to="/" activeStyle className="text-white bold">
             <i className="fa fa-home"></i> Home
-          </Link>
-          <Link to="/allproducts">
+          </NavLink>
+          <NavLink to="/allproducts" activeStyle className="text-white bold">
             <i className="fa fa-shopping-basket"></i> product
-          </Link>
-          <Link to="/Login">
+          </NavLink>
+
+          <NavLink to="/Login" activeStyle className="text-white bolder">
             <i className="fa fa-sign-in me-1"></i> Login
-          </Link>
-          <Link to="/cart">
+          </NavLink>
+          <NavLink to="/cart" activeStyle className="text-white bold">
             <i className="fa fa-shopping-cart me-1"></i>Cart ({state.length})
-          </Link>
-        </ul>
-      </div>
+          </NavLink>
+        </NavMenu>
+      </Nav>
     </>
   );
-}
+};
 
 export default Navbar;
