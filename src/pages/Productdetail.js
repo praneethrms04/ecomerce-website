@@ -5,8 +5,7 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 import { Row, Col, Container,Button } from "react-bootstrap";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+
 
 const Productdetail = () => {
   const [product, setProduct] = useState([]);
@@ -28,7 +27,6 @@ const Productdetail = () => {
 
   return (
     <>
-    <Navbar />
       <Row className="py-5">
         <Col md={{ offset: 1 }} className="pt-4">
           <Container className="mt-5">
@@ -65,7 +63,6 @@ const Productdetail = () => {
           </div>
         </Col>
       </Row>
-      <Footer />
   
     </>
   );

@@ -5,8 +5,6 @@ import { Link } from "react-router-dom";
 
 import { Container, Row, Col, Button } from "react-bootstrap";
 
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import emptycart from "../Images/emptycart.png";
 
 const Cart = () => {
@@ -95,7 +93,6 @@ const Cart = () => {
 
   return (
     <>
-      <Navbar />
       <Container className="py-5">
         <div className="pt-5">
           {state.length !== 0 && state.map(cartItems)}
@@ -103,7 +100,6 @@ const Cart = () => {
           {state.length !== 0 && button()}
         </div>
       </Container>
-      <Footer />
     </>
   );
 };

@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Row, Col, Card, Button, Container } from "react-bootstrap";
 
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 
 export default function Productsall() {
   const [products, setProducts] = useState([]);
@@ -16,7 +14,7 @@ export default function Productsall() {
 
   return (
     <>
-      <Navbar />
+      
       <Row className="pt-5">
         <Col className="pt-5">
           <h1 className="fw-bolder text-center text-upercase text-dark">
@@ -56,7 +54,6 @@ export default function Productsall() {
           );
         })}
       </Row>
-      <Footer />
     </>
   );
 }

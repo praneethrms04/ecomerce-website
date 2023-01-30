@@ -17,9 +17,6 @@ const Navbar = () => {
             <i className="fa fa-shopping-basket"></i> product
           </NavLink>
 
-          <NavLink to="/Login" activeStyle className="text-white bolder">
-            <i className="fa fa-sign-in me-1"></i> Login
-          </NavLink>
           <NavLink to="/cart" activeStyle className="text-white bold">
             <i className="fa fa-shopping-cart me-1"></i>Cart ({state.length})
           </NavLink>

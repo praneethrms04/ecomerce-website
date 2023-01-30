@@ -1,8 +1,6 @@
 import { useSelector } from "react-redux";
 import { Container } from "react-bootstrap";
 
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 
 const CheckOut = () => {
   const state = useSelector((state) => state.HandelCart);
@@ -18,9 +16,12 @@ const CheckOut = () => {
       </li>
     );
   };
+
+  const clickhandler = ()=>{
+    alert("As of now there is no payment option now...Go to Home")
+  }
   return (
     <>
-    <Navbar />
       <Container className="py-5">
         <div className="row g-5 pt-5">
           <div className="col-md-5 col-lg-4 order-md-last">
@@ -325,7 +326,9 @@ const CheckOut = () => {
               </div>
               <button
                 className="w-100 bg-success text-white mt-4"
-                type="submit"
+                type="button"
+                onClick={clickhandler}
+
               >
                 Continue to checkout
               </button>
@@ -333,7 +336,6 @@ const CheckOut = () => {
           </div>
         </div>
       </Container>
-      <Footer />
     </>
   );
 };
